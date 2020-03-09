@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Home</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
+	<!-- 引入 echarts.js -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/api?v=3.0&ak=WYbWDwS8NW7EuxFGqhdYlsF120PhYdSn"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+	<!-- Fonts and icons -->
+	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+
+	<script>
+		WebFont.load({
+			google: { "families": ["Lato:300,400,700,900"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/atlantis.min.css">
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="assets/css/demo.css">
+
+</head>
+
+<body data-background-color="dark" onload="init()">
+	<script type="text/javascript">
+		var datatable = null;
+		var db = openDatabase('mTyphoon', '1.0', 'test db', 1024 * 100);//数据库名 版本 数据库描述 大小
+
+		function init() {//初始化工作
+			datatable = document.getElementById('datatable');
+			showAllData();
+		}
+		function removeAllData() {//移除页面上展示的数据
+			for (var i = datatable.childNodes.length - 1; i >= 0; i--) {
+				datatable.removeChild(datatable.childNodes[i]);
+			}
+			var tr = document.createElement('tr');
+			var th1 = document.createElement('th');
+			var th2 = document.createElement('th');
+			th1.innerHTML = '国家';
+			th2.innerHTML = '受损程度';
+			tr.appendChild(th1);
+			tr.appendChild(th2);
+			datatable.appendChild(tr);
+
+		}
+		function showData(row) {//显示数据
+			var tr = document.createElement('tr');
+			var td1 = document.createElement('td');
+			td1.innerHTML = row.Contr;
+			var td2 = document.createElement('td');
+			td2.innerHTML = row.damRange;
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			datatable.appendChild(tr);
+		}
+		function showAllData() {//显示所有数据
+
+			db.transaction(function (tx) {
+				tx.executeSql('create table if not exists TypData(Contr TEXT,damRange TEXT)', [], function (tx, res) {
+
+				}, function (tx, err) {
+					alert(err.message)
+				});
+
+				tx.executeSql('select * from TypData', [], function (tx, result) {
+					removeAllData();
+					for (var i = 0; i < result.rows.length; i++) {
+						showData(result.rows.item(i));
+					}
+				})
+			})
+		}
+		function saveData() {//保存数据
+			var Contr = document.getElementById('Contr').value;
+			var damRange = document.getElementById('damRange').value;
+			addData(Contr, damRange);
+			showAllData();
+		}
+		function addData(Contr, damRange) {//添加数据
+			db.transaction(function (tx) {
+				tx.executeSql('insert into TypData values(?,?)', [Contr, damRange], function (tx, rs) {
+					alert('yes');
+				},
+					function (tx, err) {
+						alert(err.source + '====' + err.message);
+					})
+			})
+		}
+		function delAllData() {//删除所有数据
+			db.transaction(function (tx) {
+				tx.executeSql('delete from TypData', [], function (tx, res) {
+					alert('删除成功~');
+				}, function (tx, err) {
+					alert('删除失败' + err.message);
+				})
+			})
+			showAllData();
+		}
+		function SelectData() {//查询数据
+			var ContrName = document.getElementById('Selec').value;
+			db.transaction(function (context) {
+				context.executeSql('SELECT damRange FROM TypData WHERE Contr =? ', [ContrName], function (context, results) {
+					var items = results.rows;
+					if (items.length == 0) throw (error);
+					for (i = 0; i < items.length; i++) {
+						var item = items.item(i);
+						alert(ContrName + '的受损程度为:' + item.damRange);
+					}
+				});
+			}, function (error) {
+				alert('查询数据失败:[' + error.message + ']');
+			}, function () {
+				alert('查询数据成功');
+			});
+		}
+	</script>
+
+	<div class="wrapper">
+		<div class="main-header">
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="dark2">
+
+				<a class="logo">
+					<img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+					data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
+
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+						<form class="navbar-left navbar-form nav-search mr-md-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pr-1" onclick="SelectData()">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input id="Selec" type="text" placeholder="Search ..." class="form-control">
+							</div>
+						</form>
+					</div>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+								aria-expanded="false">
+								<div class="avatar-sm">
+									<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+		</div>
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									TyphoonInfo
+									<span class="user-level">Platform</span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+						<li class="nav-item active">
+							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+								<i class="fas fa-home"></i>
+								<p>台风种类</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="dashboard">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="news.html">
+											<span class="sub-item">莫兰蒂</span>
+										</a>
+									</li>
+									<li>
+										<a href="news米娜.html"">
+											<span class=" sub-item">米娜</span>
+										</a>
+									</li>
+									<li>
+										<a href="news海马.html"">
+											<span class=" sub-item">海马</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Components</h4>
+						</li>
+						<li class="nav-item">
+							<a href="#">
+								<i class="fas fa-table"></i>
+								<p>新闻摘要</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="index莫兰蒂.html">
+								<i class="fas fa-layer-group"></i>
+								<p>台风总览</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="莫_影响分布.html">
+								<i class="fas fa-th-list"></i>
+								<p>影响分布</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="#forms">
+								<i class="fas fa-pen-square"></i>
+								<p>保存图片</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h2 class="text-white pb-2 fw-bold">莫兰蒂</h2>
+								<h5 class="text-white op-7 mb-2">台风莫兰蒂（英语：Typhoon
+									Meranti，国际编号：1614，联合台风警报中心：16W，菲律宾大气地球物理和天文服务管理局：Ferdie）为2016年太平洋台风季第14个被命名的风暴。</h5>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="page-inner mt--5">
+					<div class="row row-card-no-pd mt--2">
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-round">
+								<div class="card-body ">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="flaticon-chart-pie text-warning"></i>
+											</div>
+										</div>
+										<div class="col-7 col-stats">
+											<div class="numbers">
+												<p class="card-category">持续时间</p>
+												<h4 class="card-title">6天</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-round">
+								<div class="card-body ">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="flaticon-coins text-success"></i>
+											</div>
+										</div>
+										<div class="col-7 col-stats">
+											<div class="numbers">
+												<p class="card-category">损失度量</p>
+												<h4 class="card-title">$ 26.3亿</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-round">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="flaticon-error text-danger"></i>
+											</div>
+										</div>
+										<div class="col-7 col-stats">
+											<div class="numbers">
+												<p class="card-category">死亡人数</p>
+												<h4 class="card-title">30人</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-round">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="flaticon-twitter text-primary"></i>
+											</div>
+										</div>
+										<div class="col-7 col-stats">
+											<div class="numbers">
+												<p class="card-category">获取动态</p>
+												<h4 class="card-title">1,120,000</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">新闻</div>
+								</div>
+								<div class="card-body">
+									<ol class="activity-feed">
+										<li class="feed-item feed-item-secondary">
+											<time class="date" datetime="9-25">Oct 17</time>
+											<span class="text"> <a
+													href="http://m.mnw.cn/nanan/news/2210203.html">南安林坑村“莫兰蒂”台风受灾户年底迁新居</a></span>
+										</li>
+										<li class="feed-item feed-item-success">
+											<time class="date" datetime="9-24">Sep 14</time>
+											<span class="text"><a
+													href="https://taiwan.huanqiu.com/gallery/9CaKrnQhwFk">今年地表最强台风莫兰蒂袭击台湾
+													阵风达17级以上</a></span>
+										</li>
+										<li class="feed-item feed-item-info">
+											<time class="date" datetime="9-23">Sep 15</time>
+											<span class="text"><a
+													href="https://baijiahao.baidu.com/s?id=1611603196971952983&wfr=spider&for=pc">印象厦门·2周年,还记得两年前席卷整个厦门的台风“莫兰蒂”吗</a></span>
+										</li>
+										<li class="feed-item feed-item-warning">
+											<time class="date" datetime="9-21">Sep 17</time>
+											<span class="text"><a
+													href="http://news.163.com/photoview/00AN0001/2198389.html#p=C15FE4EN00AN0001">台风"莫兰蒂"重创台湾：远洋渔船被掀翻</a></span>
+										</li>
+										<li class="feed-item feed-item-danger">
+											<time class="date" datetime="9-18">Sep 16</time>
+											<span class="text"><a
+													href="http://news.163.com/photoview/00AP0001/2198240.html#p=C12N75VO00AP0001">台风“莫兰蒂”离境
+													福州全城灾后自救</a></span>
+										</li>
+										<li class="feed-item">
+											<time class="date" datetime="9-17">Sep 15</time>
+											<span class="text"><a
+													href="http://www.xinhuanet.com/politics/2016-09/15/c_129282558.htm">台风“莫兰蒂”3时05分登陆福建厦门
+													影响闽浙苏等地</a></span>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-head-row">
+										<div class="card-title">相关文献</div>
+										<div class="card-tools">
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="d-flex">
+										<div class="avatar avatar-online">
+											<span
+												class="avatar-title rounded-circle border border-white bg-info">J</span>
+										</div>
+										<div class="flex-1 ml-3 pt-1">
+											<h6 class="text-uppercase fw-bold mb-1">沈华平; 梁秋枫; 郭秀凤; 林航 <span
+													class="text-warning pl-3">科技创新与应用</span></h6>
+											<span class="text-muted"><a
+													href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2019&filename=CXYY201924033&v=MjI3NjdTN0RoMVQzcVRyV00xRnJDVVJMT2VadVpyRnluZ1ZiM09KalhTZDdHNEg5ak9xNDlHWjRSOGVYMUx1eFk=">
+													强台风“莫兰蒂”对厦门机场的影响过程分析</a></span>
+										</div>
+										<div class="float-right pt-1">
+											<small class="text-muted">2019 Aug 15</small>
+										</div>
+									</div>
+									<div class="separator-dashed"></div>
+
+									<div class="d-flex">
+										<div class="avatar avatar-offline">
+											<span
+												class="avatar-title rounded-circle border border-white bg-secondary">P</span>
+										</div>
+										<div class="flex-1 ml-3 pt-1">
+											<h6 class="text-uppercase fw-bold mb-1"> 陈汶江; 王伟<span
+													class="text-success pl-3">成都信息工程大学学报</span></h6>
+											<span class="text-muted"><a
+													href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDTEMP&filename=CDQX201904017&v=MzAzMTFNcTQ5RVk0UjhlWDFMdXhZUzdEaDFUM3FUcldNMUZyQ1VSTE9lWnVackZ5bmhVcnJPSmluYWRyRzRIOWo=">2016年14号台风“莫兰蒂”特征分析</a></span>
+										</div>
+										<div class="float-right pt-1">
+											<small class="text-muted">2019 Aug 15</small>
+										</div>
+									</div>
+									<div class="separator-dashed"></div>
+									<div class="d-flex">
+										<div class="avatar avatar-away">
+											<span
+												class="avatar-title rounded-circle border border-white bg-danger">L</span>
+										</div>
+										<div class="flex-1 ml-3 pt-1">
+											<h6 class="text-uppercase fw-bold mb-1">曹楚; 王忠东; 吴舒婷 <span
+													class="text-muted pl-3">浙江气象</span></h6>
+											<span class="text-muted"><a
+													href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2019&filename=ZJQX201902010&v=MjA1NjRSTE9lWnVackZ5bmhXci9OUHlmYWRyRzRIOWpNclk5RVpJUjhlWDFMdXhZUzdEaDFUM3FUcldNMUZyQ1U=">台风“莫兰蒂”(1614)影响期间浙江暴雨成因分析</a></span>
+										</div>
+										<div class="float-right pt-1">
+											<small class="text-muted">2019 Jun 15</small>
+										</div>
+									</div>
+									<div class="separator-dashed"></div>
+									<div class="d-flex">
+										<div class="avatar avatar-offline">
+											<span
+												class="avatar-title rounded-circle border border-white bg-secondary">P</span>
+										</div>
+										<div class="flex-1 ml-3 pt-1">
+											<h6 class="text-uppercase fw-bold mb-1">董加斌; 黄新晴 <span
+													class="text-success pl-3">应用海洋学学报</span></h6>
+											<span class="text-muted"><a
+													href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2019&filename=TWHX201902006&v=MjQ2NjBNVHJEZHJHNEg5ak1yWTlGWW9SOGVYMUx1eFlTN0RoMVQzcVRyV00xRnJDVVJMT2VadVpyRnlqbFc3dk8=">台风“莫兰蒂”登陆前后引起的浙江沿海地区强降水过程分析</a></span>
+										</div>
+										<div class="float-right pt-1">
+											<small class="text-muted">2019 May 15</small>
+										</div>
+									</div>
+									<div class="separator-dashed"></div>
+									<div class="d-flex">
+										<div class="avatar avatar-away">
+											<span
+												class="avatar-title rounded-circle border border-white bg-danger">L</span>
+										</div>
+										<div class="flex-1 ml-3 pt-1">
+											<h6 class="text-uppercase fw-bold mb-1">秦一芳; 林双毅; 高雅玲; 周锦业 <span
+													class="text-muted pl-3">中国农业通报</span></h6>
+											<span class="text-muted"><a
+													href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2018&filename=ZNTB201734024&v=MTc2NjV4WVM3RGgxVDNxVHJXTTFGckNVUkxPZVp1WnJGeWprVjc3QlB5UGZiTEc0SDliUHE0OUhZSVI4ZVgxTHU=">台风对城市道路行道树的影响和对策——以福建省厦门市“莫兰蒂”台风为例</a></span>
+										</div>
+										<div class="float-right pt-1">
+											<small class="text-muted">2017 Dec 05</small>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<footer class="footer">
+				<div class="container-fluid">
+					<nav class="pull-left">
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									程天佑
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									金勤耕
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									刘翀
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									王文蕊
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<div class="copyright ml-auto">
+						Copyright &copy; 2019.GIS软件开发 孟庆祥 Allrights reserved.
+					</div>
+				</div>
+			</footer>
+		</div>
+
+
+		<!-- Custom template | don't include it in your project! -->
+		<div class="custom-template">
+			<div class="title">Settings</div>
+			<div class="custom-content">
+				<div class="switcher">
+					<div class="switch-block">
+						<h4>Logo Header</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeLogoHeaderColor" data-color="dark"></button>
+							<button type="button" class="selected changeLogoHeaderColor" data-color="blue"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+							<br />
+							<button type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Navbar Header</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeTopBarColor" data-color="dark"></button>
+							<button type="button" class="changeTopBarColor" data-color="blue"></button>
+							<button type="button" class="changeTopBarColor" data-color="purple"></button>
+							<button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+							<button type="button" class="changeTopBarColor" data-color="green"></button>
+							<button type="button" class="changeTopBarColor" data-color="orange"></button>
+							<button type="button" class="changeTopBarColor" data-color="red"></button>
+							<button type="button" class="changeTopBarColor" data-color="white"></button>
+							<br />
+							<button type="button" class="changeTopBarColor" data-color="dark2"></button>
+							<button type="button" class="selected changeTopBarColor" data-color="blue2"></button>
+							<button type="button" class="changeTopBarColor" data-color="purple2"></button>
+							<button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+							<button type="button" class="changeTopBarColor" data-color="green2"></button>
+							<button type="button" class="changeTopBarColor" data-color="orange2"></button>
+							<button type="button" class="changeTopBarColor" data-color="red2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Sidebar</h4>
+						<div class="btnSwitch">
+							<button type="button" class="selected changeSideBarColor" data-color="white"></button>
+							<button type="button" class="changeSideBarColor" data-color="dark"></button>
+							<button type="button" class="changeSideBarColor" data-color="dark2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Background</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+							<button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+							<button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+							<button type="button" class="changeBackgroundColor" data-color="dark"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="custom-toggle">
+				<i class="flaticon-settings"></i>
+			</div>
+		</div>
+		<!-- End Custom template -->
+	</div>
+	<!--   Core JS Files   -->
+	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="assets/js/core/popper.min.js"></script>
+	<script src="assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+	<!-- Chart JS -->
+	<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- jQuery Sparkline -->
+	<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Chart Circle -->
+	<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+
+	<!-- Datatables -->
+	<script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+	<!-- Bootstrap Notify -->
+	<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+	<!-- Sweet Alert -->
+	<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Atlantis JS -->
+	<script src="assets/js/atlantis.min.js"></script>
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="assets/js/setting-demo.js"></script>
+	<script src="assets/js/demo.js"></script>
+	<script>
+		$('#lineChart').sparkline([102, 109, 120, 99, 110, 105, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#177dff',
+			fillColor: 'rgba(23, 125, 255, 0.14)'
+		});
+
+		$('#lineChart2').sparkline([99, 125, 122, 105, 110, 124, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#f3545d',
+			fillColor: 'rgba(243, 84, 93, .14)'
+		});
+
+		$('#lineChart3').sparkline([105, 103, 123, 100, 95, 105, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
+		});
+	</script>
+</body>
+
+</html>

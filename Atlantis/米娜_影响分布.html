@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Home</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
+	<!-- 引入 echarts.js -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/api?v=3.0&ak=WYbWDwS8NW7EuxFGqhdYlsF120PhYdSn"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+	<!-- Fonts and icons -->
+	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=WYbWDwS8NW7EuxFGqhdYlsF120PhYdSn">
+		//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+	</script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Lato:300,400,700,900"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/atlantis.min.css">
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="assets/css/demo.css">
+
+</head>
+
+<body data-background-color="dark">
+
+	<div class="wrapper">
+		<div class="main-header">
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="dark2">
+
+				<a class="logo">
+					<img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+					data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
+
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+						<form class="navbar-left navbar-form nav-search mr-md-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pr-1">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input type="text" placeholder="Search ..." class="form-control">
+							</div>
+						</form>
+					</div>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+								aria-expanded="false">
+								<div class="avatar-sm">
+									<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+		</div>
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									TyphoonInfo
+									<span class="user-level">Platform</span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+						<li class="nav-item active">
+							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+								<i class="fas fa-home"></i>
+								<p>台风种类</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="dashboard">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="news.html">
+											<span class="sub-item">莫兰蒂</span>
+										</a>
+									</li>
+									<li>
+										<a href="news米娜.html"">
+											<span class=" sub-item">米娜</span>
+										</a>
+									</li>
+									<li>
+										<a href="news海马.html"">
+											<span class=" sub-item">海马</span>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Components</h4>
+						</li>
+						<li class="nav-item">
+							<a href="news米娜.html">
+								<i class="fas fa-table"></i>
+								<p>新闻摘要</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="index米娜.html">
+								<i class="fas fa-layer-group"></i>
+								<p>台风总览</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#">
+								<i class="fas fa-th-list"></i>
+								<p>影响分布</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="assets/png/Map_mina.png">
+								<i class="fas fa-pen-square"></i>
+								<p>保存图片</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+
+		<div id="containerMap" style="height: 100%"></div>
+		<script type="text/javascript">
+			var dom = document.getElementById("containerMap");
+			var myChart = echarts.init(dom);
+			var app = {};
+			option = null;
+			var data = [
+				{ name: '崇明県', value: 9 },
+				{ name: '嵊泗县', value: 0 },
+				{ name: '岱山县', value: 1 },
+				{ name: '平潭县', value: 3 },
+				{ name: '台北县', value: 20 },
+				{ name: '基隆市', value: 1 },
+				{ name: '台北市', value: 2 },
+				{ name: '桃园县', value: 10 },
+				{ name: '宜兰县', value: 21 },
+				{ name: '新竹县', value: 12 },
+				{ name: '苗栗县', value: 15 },
+				{ name: '台中县', value: 18 },
+				{ name: '莲花县', value: 42 },
+				{ name: '南投县', value: 33 },
+				{ name: '台中市', value: 1 },
+				{ name: '彰化县', value: 9 },
+				{ name: '云林县', value: 10 },
+				{ name: '嘉义县', value: 17 },
+				{ name: '台东县', value: 33 },
+				{ name: '凤山县', value: 24 },
+				{ name: '台南县', value: 18 },
+				{ name: '台南市', value: 1 },
+				{ name: '屏东县', value: 26 },
+				{ name: '高雄市', value: 2 },
+				{ name: '玉环县', value: 3 },
+				{ name: '舟山市', value: 4 },
+				{ name: '莆田市', value: 0 },
+				{ name: '福州市', value: 60 },
+				{ name: '南平市', value: 11 },
+				{ name: '宁德市', value: 95 },
+				{ name: '温州市', value: 101 },
+				{ name: '台州市', value: 82 },
+				{ name: '丽水市', value: 148 },
+				{ name: '衢州市', value: 24 },
+				{ name: '金华市', value: 102 },
+				{ name: '绍兴市', value: 75 },
+				{ name: '宁波市', value: 77 },
+				{ name: '杭州市', value: 134 },
+				{ name: '宣州市', value: 43 },
+				{ name: '湖州市', value: 56 },
+				{ name: '嘉兴市', value: 38 },
+				{ name: '上海市', value: 50 },
+				{ name: '苏州市', value: 76 },
+				{ name: '宜兴市', value: 19 },
+				{ name: '无锡市', value: 25 },
+				{ name: '常州市', value: 36 },
+				{ name: '南京市', value: 0 },
+				{ name: '镇江市', value: 7 },
+				{ name: '泰州市', value: 22 },
+				{ name: '市辖区(南通市)', value: 79 },
+				{ name: '盐城市', value: 21 },
+				{ name: '云林县', value: 0 },
+				{ name: '嘉义县', value: 0 }
+
+			];
+			var geoCoordMap = {
+				'崇明県': [121.493194445017, 31.6430230644234],
+				'嵊泗县': [122.45919623338, 30.7094406245194],
+				'岱山县': [122.152516549724, 30.274885774208],
+				'平潭县': [119.775193084631, 25.5079867589257],
+				'台北县': [121.57440172661, 24.9900176602015],
+				'基隆市': [121.687438838057, 25.1132358914264],
+				'台北市': [121.512492199363, 25.0587416181245],
+				'桃园县': [121.229683628157, 24.8759595539898],
+				'宜兰县': [121.619750987949, 24.5716735536423],
+				'新竹县': [121.113618274015, 24.6763572669166],
+				'苗栗县': [120.900382790805, 24.4761203614599],
+				'台中县': [120.906929765845, 24.2348463020217],
+				'莲花县': [121.359174303824, 23.7749508181733],
+				'南投县': [120.957110771853, 23.8495208287711],
+				'台中市': [120.652199571415, 24.1736252246102],
+				'彰化县': [120.476943300566, 23.9404646885935],
+				'云林县': [120.37420824519, 23.6808480377688],
+				'嘉义县': [120.520191728706, 23.4663766186275],
+				'台东县': [121.03767496947, 22.9071145114037],
+				'凤山县': [120.622370204916, 23.0371667680941],
+				'台南县': [120.331277060234, 23.179559970324],
+				'台南市': [120.162657192861, 23.0238258501292],
+				'屏东县': [120.669936197804, 22.4794616564671],
+				'高雄市': [120.308913421985, 22.6421838540267],
+				'玉环县': [121.253853602606, 28.1547722104831],
+				'舟山市': [122.127135901964, 30.046072166857],
+				'莆田市': [119.320957399234, 25.2508352124663],
+				'福州市': [119.386602973975, 26.1133697581145],
+				'南平市': [119.033043930384, 27.306893883581],
+				'宁德市': [119.613363804583, 27.0444416513564],
+				'温州市': [120.396101422287, 27.8878180817764],
+				'台州市': [121.064393228323, 28.7852769265146],
+				'丽水市': [119.525885733013, 28.1852980961381],
+				'衢州市': [119.062621151912, 28.9397642935352],
+				'金华市': [119.944303761477, 29.1025933141845],
+				'绍兴市': [120.618338982449, 29.7029104092589],
+				'宁波市': [121.448939486773, 29.7049859828195],
+				'杭州市': [119.557377876004, 29.9469441516092],
+				'宣州市': [119.211311383108, 30.7969308404584],
+				'湖州市': [119.847185869127, 30.7416307435833],
+				'嘉兴市': [120.750556397334, 30.6558027315972],
+				'上海市': [121.380287097801, 31.0765182960791],
+				'苏州市': [120.61702013501, 31.3489703470404],
+				'宜兴市': [119.779573716994, 31.3562727018036],
+				'无锡市': [120.292955593595, 31.64527415357],
+				'常州市': [119.666362027714, 31.6231289211013],
+				'南京市': [119.172626407723, 31.3131061200168],
+				'镇江市': [119.731458560666, 31.9724864735278],
+				'泰州市': [120.152399929102, 32.1945316527818],
+				'市辖区(南通市)': [120.977916968214, 32.2013341514697],
+				'盐城市': [120.646702374768, 32.8371765240949],
+				'云林县': [120.17244000773, 23.5016792303976],
+				'嘉义县': [120.17244000773, 23.5016792303976]
+
+			};
+
+			var convertData = function (data) {
+				var res = [];
+				for (var i = 0; i < data.length; i++) {
+					var geoCoord = geoCoordMap[data[i].name];
+					if (geoCoord) {
+						res.push({
+							name: data[i].name,
+							value: geoCoord.concat(data[i].value)
+						});
+					}
+				}
+				return res;
+			};
+
+			option = {
+				title: {
+					text: '全国主要市区受台风影响分布',
+					subtext: 'data from Typhoon.in',
+					sublink: 'index莫兰蒂.html',
+					left: 'center'
+				},
+				tooltip: {
+					trigger: 'item'
+				},
+				bmap: {
+					center: [104.114129, 37.550339],
+					zoom: 5,
+					roam: true,
+					mapStyle: {
+						styleJson: [{
+							'featureType': 'water',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#d1d1d1'
+							}
+						}, {
+							'featureType': 'land',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#f3f3f3'
+							}
+						}, {
+							'featureType': 'railway',
+							'elementType': 'all',
+							'stylers': {
+								'visibility': 'off'
+							}
+						}, {
+							'featureType': 'highway',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#fdfdfd'
+							}
+						}, {
+							'featureType': 'highway',
+							'elementType': 'labels',
+							'stylers': {
+								'visibility': 'off'
+							}
+						}, {
+							'featureType': 'arterial',
+							'elementType': 'geometry',
+							'stylers': {
+								'color': '#fefefe'
+							}
+						}, {
+							'featureType': 'arterial',
+							'elementType': 'geometry.fill',
+							'stylers': {
+								'color': '#fefefe'
+							}
+						}, {
+							'featureType': 'poi',
+							'elementType': 'all',
+							'stylers': {
+								'visibility': 'off'
+							}
+						}, {
+							'featureType': 'green',
+							'elementType': 'all',
+							'stylers': {
+								'visibility': 'off'
+							}
+						}, {
+							'featureType': 'subway',
+							'elementType': 'all',
+							'stylers': {
+								'visibility': 'off'
+							}
+						}, {
+							'featureType': 'manmade',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#d1d1d1'
+							}
+						}, {
+							'featureType': 'local',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#d1d1d1'
+							}
+						}, {
+							'featureType': 'arterial',
+							'elementType': 'labels',
+							'stylers': {
+								'visibility': 'off'
+							}
+						}, {
+							'featureType': 'boundary',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#fefefe'
+							}
+						}, {
+							'featureType': 'building',
+							'elementType': 'all',
+							'stylers': {
+								'color': '#d1d1d1'
+							}
+						}, {
+							'featureType': 'label',
+							'elementType': 'labels.text.fill',
+							'stylers': {
+								'color': '#999999'
+							}
+						}]
+					}
+				},
+				series: [
+					{
+						name: 'typhoon',
+						type: 'scatter',
+						coordinateSystem: 'bmap',
+						data: convertData(data),
+						symbolSize: function (val) {
+							return val[2] / 10;
+						},
+						label: {
+							normal: {
+								formatter: '{b}',
+								position: 'right',
+								show: false
+							},
+							emphasis: {
+								show: true
+							}
+						},
+						itemStyle: {
+							normal: {
+								color: 'purple'
+							}
+						}
+					},
+					{
+						name: 'Top 5',
+						type: 'effectScatter',
+						coordinateSystem: 'bmap',
+						data: convertData(data.sort(function (a, b) {
+							return b.value - a.value;
+						}).slice(0, 6)),
+						symbolSize: function (val) {
+							return val[2] / 10;
+						},
+						showEffectOn: 'render',
+						rippleEffect: {
+							brushType: 'stroke'
+						},
+						hoverAnimation: true,
+						label: {
+							normal: {
+								formatter: '{b}',
+								position: 'right',
+								show: true
+							}
+						},
+						itemStyle: {
+							normal: {
+								color: 'purple',
+								shadowBlur: 10,
+								shadowColor: '#333'
+							}
+						},
+						zlevel: 1
+					}
+				]
+			};;
+			if (option && typeof option === "object") {
+				myChart.setOption(option, true);
+			}
+		</script>
+		<!-- Custom template | don't include it in your project! -->
+		<div class="custom-template">
+			<div class="title">Settings</div>
+			<div class="custom-content">
+				<div class="switcher">
+					<div class="switch-block">
+						<h4>Logo Header</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeLogoHeaderColor" data-color="dark"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+							<br />
+							<button type="button" class="selected changeLogoHeaderColor" data-color="dark2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Navbar Header</h4>
+						<div class="btnSwitch">
+							<button type="button" class="selected changeTopBarColor" data-color="dark"></button>
+							<button type="button" class="changeTopBarColor" data-color="blue"></button>
+							<button type="button" class="changeTopBarColor" data-color="purple"></button>
+							<button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+							<button type="button" class="changeTopBarColor" data-color="green"></button>
+							<button type="button" class="changeTopBarColor" data-color="orange"></button>
+							<button type="button" class="changeTopBarColor" data-color="red"></button>
+							<button type="button" class="changeTopBarColor" data-color="white"></button>
+							<br />
+							<button type="button" class="changeTopBarColor" data-color="dark2"></button>
+							<button type="button" class="changeTopBarColor" data-color="blue2"></button>
+							<button type="button" class="changeTopBarColor" data-color="purple2"></button>
+							<button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+							<button type="button" class="changeTopBarColor" data-color="green2"></button>
+							<button type="button" class="changeTopBarColor" data-color="orange2"></button>
+							<button type="button" class="changeTopBarColor" data-color="red2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Sidebar</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeSideBarColor" data-color="white"></button>
+							<button type="button" class="changeSideBarColor" data-color="dark"></button>
+							<button type="button" class="selected changeSideBarColor" data-color="dark2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Background</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+							<button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+							<button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+							<button type="button" class="selected changeBackgroundColor" data-color="dark"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="custom-toggle">
+				<i class="flaticon-settings"></i>
+			</div>
+		</div>
+		<!-- End Custom template -->
+	</div>
+	<!--   Core JS Files   -->
+	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="assets/js/core/popper.min.js"></script>
+	<script src="assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+	<!-- Chart JS -->
+	<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- jQuery Sparkline -->
+	<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Chart Circle -->
+	<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+
+	<!-- Datatables -->
+	<script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+	<!-- Bootstrap Notify -->
+	<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+	<!-- Sweet Alert -->
+	<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Atlantis JS -->
+	<script src="assets/js/atlantis.min.js"></script>
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="assets/js/setting-demo.js"></script>
+	<!-- <script src="assets/js/demo.js"></script> -->
+	<script>
+		$('#lineChart').sparkline([102, 109, 120, 99, 110, 105, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart2').sparkline([99, 125, 122, 105, 110, 124, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart3').sparkline([0, 0, 123, 100, 95, 105, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+	</script>
+	<script type="text/javascript" src="html2canvas.js"></script>
+
+
+	<!-- <script>
+		$(function () {
+			$(".down2").click(function () {
+				html2canvas(document.getElementById("containerMap")).then(function (canvas) {
+					var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url
+
+					// window.location.href = imgUri; // 下载图片
+					var $a = document.createElement('a');
+					$a.setAttribute("href", imgUri);
+					$a.setAttribute("download", "echarts图片下载.jpg");
+					$a.click();
+
+				});
+			});
+		});
+	</script> -->
+</body>
+
+</html>

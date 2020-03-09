@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Home</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
+	<!-- 引入 echarts.js -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/api?v=3.0&ak=WYbWDwS8NW7EuxFGqhdYlsF120PhYdSn"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+	<!-- Fonts and icons -->
+	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+
+	<script>
+		WebFont.load({
+			google: { "families": ["Lato:300,400,700,900"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/atlantis.min.css">
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="assets/css/demo.css">
+
+</head>
+
+<body data-background-color="dark">
+
+	<div class="wrapper">
+		<div class="main-header">
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="dark2">
+
+				<a class="logo">
+					<img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+					data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
+
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+						<form class="navbar-left navbar-form nav-search mr-md-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pr-1">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input type="text" placeholder="Search ..." class="form-control">
+							</div>
+						</form>
+					</div>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+								aria-expanded="false">
+								<div class="avatar-sm">
+									<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+		</div>
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									TyphoonInfo
+									<span class="user-level">Platform</span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+						<li class="nav-item active">
+							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+								<i class="fas fa-home"></i>
+								<p>台风种类</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="dashboard">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="news.html">
+											<span class="sub-item">莫兰蒂</span>
+										</a>
+									</li>
+									<li>
+										<a href="news米娜.html"">
+											<span class=" sub-item">米娜</span>
+										</a>
+									</li>
+									<li>
+										<a href="news海马.html"">
+											<span class=" sub-item">海马</span>
+										</a>
+									</li>
+
+
+
+								</ul>
+							</div>
+						</li>
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Components</h4>
+						</li>
+						<li class="nav-item">
+							<a href="news米娜.html">
+								<i class="fas fa-table"></i>
+								<p>新闻摘要</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#">
+								<i class="fas fa-layer-group"></i>
+								<p>台风总览</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="米娜_影响分布.html">
+								<i class="fas fa-th-list"></i>
+								<p>影响分布</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#forms">
+								<i class="fas fa-pen-square"></i>
+								<p>保存图片</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+
+		<div class="main-panel">
+
+			<div class="content">
+				<div class="page-inner">
+					<div class="mt-2 mb-4">
+						<h2 class="text-white pb-2">Welcome to Atlantis!</h2>
+						<h5 class="text-white op-7 mb-4">This typhoon information platform can provide the necessery
+							information about the disasters.</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card card-dark bg-primary-gradient">
+								<div class="card-body pb-0">
+									<div class="h3 float-right">avg: 977(hPa)</div>
+									<h2 class="mb-2">中心气压</h2>
+									<p>Central Pressure</p>
+									<div class="pull-in sparkline-fix chart-as-background">
+										<div id="lineChart"><canvas width="327" height="70"
+												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card card-dark bg-secondary-gradient">
+								<div class="card-body pb-0">
+									<div class="h3 float-right">avg: 31(m/s)</div>
+									<h2 class="mb-2">最大风速</h2>
+									<p>Max Wind Speed</p>
+									<div class="pull-in sparkline-fix chart-as-background">
+										<div id="lineChart2"><canvas width="327" height="70"
+												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card card-dark bg-success2">
+								<div class="card-body pb-0">
+									<div class="h3 float-right">avg: 25(m/s)</div>
+									<h2 class="mb-2">移动速度</h2>
+									<p>Travel Rate</p>
+									<div class="pull-in sparkline-fix chart-as-background">
+										<div id="lineChart3"><canvas width="327" height="70"
+												style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+								<script src="../Build/Cesium/Cesium.js"></script>
+								<style>
+									@import url(../Build/Cesium/Widgets/widgets.css);
+
+									html,
+									body,
+									#cesiumContainer {
+										width: 100%;
+										height: 100%;
+										margin: 0;
+										padding: 0;
+										overflow: -moz-hidden-unscrollable;
+									}
+								</style>
+								<div id="cesiumContainer"></div>
+								<script>
+									var viewer = new Cesium.Viewer('cesiumContainer');
+
+
+									var start = Cesium.JulianDate.fromIso8601('2019-09-28T08:00Z');
+									var end = Cesium.JulianDate.fromIso8601('2019-10-03T14:00Z');
+
+									viewer.timeline.zoomTo(start, end);
+
+									viewer.clock.startTime = start;
+									viewer.clock.stopTime = end;
+									viewer.clock.currentTime = start;
+									viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
+									viewer.clock.multiplier = 86400;
+
+
+									Cesium.GeoJsonDataSource.load('../data/mina.json').then(function (dataSource) {
+										viewer.dataSources.add(dataSource);
+
+										var entities = dataSource.entities.values;
+
+										for (var i = 0; i < entities.length; i++) {
+
+											var entity = entities[i];
+
+											entity.billboard.image = '../data/3.png';
+											entity.billboard.width = 15;
+											entity.billboard.height = 15;
+											entity.billboard.color = new Cesium.Color(1.0, 1.0, 1.0, 0.5);//在此设置透明度
+											entity.billboard.pixelOffset = new Cesium.Cartesian2(0, 5);
+											//entity.billboard.scaleByDistance = new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0);
+											entity.availability = new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
+												start: Cesium.JulianDate.fromIso8601(entity.properties.starttime._value),
+												stop: Cesium.JulianDate.fromIso8601('2019-10-03T14:00Z')
+											})]);
+
+
+											if (i > 0) {
+												var bData = {
+													shapeType: "Polyline",
+													polyline: {
+														positions: Cesium.Cartesian3.fromDegreesArray([
+															entities[i].properties.longitude,
+															entities[i].properties.latitude,
+															entities[i - 1].properties.longitude,
+															entities[i - 1].properties.latitude,
+														]),
+														clampToGround: true,
+														width: 3,
+														//alpha: 0.5;
+													}
+												};
+												var entity_1 = viewer.entities.add(bData);
+												entity_1.availability = new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
+													start: Cesium.JulianDate.fromIso8601(entity.properties.starttime._value),
+													stop: Cesium.JulianDate.fromIso8601('2019-10-03T14:00Z')
+												})]);
+											}
+
+											if (i < entities.length - 1) {
+												var entity_2 = new Cesium.Entity(
+													{
+														position: Cesium.Cartesian3.fromDegrees(entities[i].properties.longitude, entities[i].properties.latitude),
+														name: "name",
+														point: new Cesium.PointGraphics({
+															color: Cesium.Color.YELLOW.withAlpha(0.5),
+															pixelSize: entity.properties.level * 6,
+															outlineColor: Cesium.Color.BLUE,
+															outlineWidth: 1,
+														}),
+													});
+												viewer.entities.add(entity_2);
+												entity_2.availability = new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
+													start: Cesium.JulianDate.fromIso8601(entity.properties.starttime._value),
+													stop: Cesium.JulianDate.fromIso8601(entities[i + 1].properties.starttime._value)
+												})]);
+											}
+
+										}
+									});
+									viewer.camera.setView({
+										// Cesium的坐标是以地心为原点，一向指向南美洲，一向指向亚洲，一向指向北极州
+										// fromDegrees()方法，将经纬度和高程转换为世界坐标
+										destination: Cesium.Cartesian3.fromDegrees(117.48, 30.67, 20000000),
+										orientation: {
+											// 指向
+											heading: Cesium.Math.toRadians(0),
+											// 视角
+											pitch: Cesium.Math.toRadians(-90),
+											roll: 0.0
+										}
+									});
+
+									;
+
+								</script>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">台风等级</div>
+								</div>
+								<div>
+									<div id="container5" style="width: 100%; height: 300px"></div>
+									<script type="text/javascript">
+										var dom = document.getElementById("container5");
+										var myChart = echarts.init(dom);
+										var app = {};
+										option = null;
+										option = {
+											tooltip: {
+												trigger: 'item',
+												formatter: "{a} <br/>{b} : {c} ({d}%)"
+											},
+											visualMap: {
+												show: false,
+												min: 0,
+												max: 80,
+												inRange: {
+													colorLightness: [0, 1]
+												}
+											},
+											series: [
+												{
+													name: '饼图',
+													type: 'pie',
+													radius: '55%',
+													center: ['50%', '50%'],
+													data: [
+														// { value: 30, name: '热带低压' },
+														{ value: 36, name: '热带风暴' },
+														{ value: 26, name: '强热带风暴' },
+														{ value: 74, name: '台风' }
+														// { value: 0, name: '强台风' },
+														// { value: 0, name: '超强台风' },
+													].sort(function (a, b) { return a.value - b.value; }),
+													roseType: 'radius',
+													label: {
+														normal: {
+															textStyle: {
+																color: 'rgba(255, 150, 150, 1)'
+															}
+														}
+													},
+													labelLine: {
+														normal: {
+															lineStyle: {
+																color: 'rgba(255, 255, 255, 0.3)'
+															},
+															smooth: 0.2,
+															length: 10,
+															length2: 20
+														}
+													},
+													itemStyle: {
+														normal: {
+															color: '#c23531',
+															shadowBlur: 200,
+															shadowColor: 'rgba(0, 0, 0, 0.5)'
+														}
+													},
+
+													animationType: 'scale',
+													animationEasing: 'elasticOut',
+													animationDelay: function (idx) {
+														return Math.random() * 200;
+													}
+												}
+											]
+										};;
+										if (option && typeof option === "object") {
+											myChart.setOption(option, true);
+										}
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="card-title fw-mediumbold">移动方向</div>
+									<div>
+										<div id="container55" style="width: 100%; height: 300px"></div>
+										<script type="text/javascript">
+											var dom = document.getElementById("container55");
+											var myChart = echarts.init(dom);
+											var app = {};
+											option = null;
+											option = {
+												radar:
+													[
+														{
+															indicator:
+																[
+																	{ text: '北', max: 35 },
+																	{ text: '北北西', max: 35 },
+																	{ text: '北西', max: 35 },
+																	{ text: '北西北', max: 35 },
+																	{ text: '西', max: 35 },
+																	{ text: '南西南', max: 35 },
+																	{ text: '南西', max: 35 },
+																	{ text: '南南西', max: 35 },
+																	{ text: '南', max: 35 },
+																	{ text: '南南东', max: 35 },
+																	{ text: '南东', max: 35 },
+																	{ text: '东南东', max: 35 },
+																	{ text: '东', max: 35 },
+																	{ text: '东北东', max: 35 },
+																	{ text: '北东', max: 35 },
+																	{ text: '北北东', max: 35 }
+																],
+															center: ['50%', '50%'],
+															radius: 120,
+															startAngle: 90,
+															splitNumber: 4,
+															shape: 'circle',
+															name:
+															{
+																formatter: '{value}',
+																textStyle: {
+																	color: '#72ACD1'
+																}
+															},
+															splitArea:
+															{
+																areaStyle:
+																{
+																	color: ['rgba(114, 172, 209, 0.2)',
+																		'rgba(114, 172, 209, 0.4)', 'rgba(114, 172, 209, 0.6)',
+																		'rgba(114, 172, 209, 0.8)', 'rgba(114, 172, 209, 1)'],
+																	shadowColor: 'rgba(0, 0, 0, 0.3)',
+																	shadowBlur: 10
+																}
+															},
+															axisLine:
+															{
+																lineStyle: {
+																	color: 'rgba(255, 255, 255, 0.5)'
+																}
+															},
+															splitLine:
+															{
+																lineStyle: {
+																	color: 'rgba(255, 255, 255, 0.5)'
+																}
+															}
+														},
+													],
+												series:
+													[
+														{
+															name: '雷达图',
+															type: 'radar',
+															itemStyle:
+															{
+																emphasis:
+																{
+																	lineStyle: {
+																		width: 4
+																	}
+																}
+															},
+															data:
+																[
+																	{
+																		value: [12, 15, 18, 32, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9, 25],
+																		name: '图二',
+																		areaStyle:
+																		{
+																			normal: {
+																				color: 'rgba(255, 255, 255, 0.5)'
+																			}
+																		}
+																	}
+																]
+														}
+													]
+											};
+											if (option && typeof option === "object") {
+												myChart.setOption(option, true);
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="card-title fw-mediumbold">时序信息</div>
+									<div id="container999" style="width: 350px; height: 280px"></div>
+									<script type="text/javascript">
+										var dom = document.getElementById("container999");
+										var myChart = echarts.init(dom);
+										var app = {};
+										option = null;
+
+										var dataTP = [
+											[0, 998, 18, 8, 30, 300, 0, "热带风暴"],
+											[1, 998, 18, 8, 24, 300, 0, "热带风暴"],
+											[2, 995, 20, 8, 28, 300, 0, "热带风暴"],
+											[3, 990, 23, 9, 27, 300, 0, "热带风暴"],
+											[4, 990, 23, 9, 27, 300, 0, "热带风暴"],
+											[5, 990, 23, 9, 27, 300, 0, "热带风暴"],
+											[6, 982, 28, 10, 26, 300, 60, "强热带风暴"],
+											[7, 982, 28, 10, 25, 300, 60, "强热带风暴"],
+											[8, 982, 28, 10, 25, 300, 60, "强热带风暴"],
+											[9, 982, 28, 10, 20, 300, 60, "强热带风暴"],
+											[10, 975, 33, 12, 20, 300, 60, "台风"],
+											[11, 975, 33, 12, 20, 300, 60, "台风"],
+											[12, 975, 33, 12, 23, 300, 60, "台风"],
+											[13, 975, 33, 12, 23, 300, 60, "台风"],
+											[14, 975, 33, 12, 23, 300, 60, "台风"],
+											[15, 975, 33, 12, 23, 300, 60, "台风"],
+											[16, 975, 33, 12, 25, 300, 60, "台风"],
+											[17, 975, 33, 12, 25, 300, 60, "台风"],
+											[18, 975, 33, 12, 25, 300, 60, "台风"],
+											[19, 975, 33, 12, 25, 300, 60, "台风"],
+											[20, 975, 33, 12, 25, 300, 60, "台风"],
+											[21, 975, 33, 12, 25, 300, 60, "台风"],
+											[22, 970, 35, 12, 25, 300, 80, "台风"],
+											[23, 970, 35, 12, 25, 300, 80, "台风"],
+											[24, 970, 35, 12, 25, 300, 80, "台风"],
+											[25, 970, 35, 12, 28, 300, 80, "台风"],
+											[26, 970, 35, 12, 28, 300, 80, "台风"],
+											[27, 970, 35, 12, 28, 300, 80, "台风"],
+											[28, 965, 38, 13, 25, 300, 100, "台风"],
+											[29, 965, 38, 13, 25, 300, 100, "台风"],
+											[30, 965, 38, 13, 25, 300, 100, "台风"],
+											[31, 960, 40, 13, 25, 300, 100, "台风"],
+											[32, 960, 40, 13, 25, 300, 100, "台风"],
+											[33, 960, 40, 13, 25, 300, 100, "台风"],
+											[34, 960, 40, 13, 25, 330, 120, "台风"],
+											[35, 960, 40, 13, 25, 330, 120, "台风"],
+											[36, 960, 40, 13, 25, 330, 120, "台风"],
+											[37, 960, 40, 13, 22, 330, 120, "台风"],
+											[38, 960, 40, 13, 20, 330, 120, "台风"],
+											[39, 960, 40, 13, 20, 330, 120, "台风"],
+											[40, 960, 40, 13, 22, 330, 120, "台风"],
+											[41, 960, 40, 13, 22, 330, 120, "台风"],
+											[42, 960, 40, 13, 22, 330, 120, "台风"],
+											[43, 965, 38, 13, 20, 330, 120, "台风"],
+											[44, 965, 38, 13, 20, 330, 120, "台风"],
+											[45, 965, 38, 13, 20, 330, 120, "台风"],
+											[46, 965, 38, 13, 20, 330, 120, "台风"],
+											[47, 965, 38, 13, 20, 330, 120, "台风"],
+											[48, 965, 38, 13, 20, 330, 120, "台风"],
+											[49, 970, 35, 12, 20, 330, 120, "台风"],
+											[50, 975, 33, 12, 20, 330, 90, "台风"],
+											[51, 975, 33, 12, 20, 330, 90, "台风"],
+											[52, 975, 33, 12, 25, 330, 90, "台风"],
+											[53, 975, 33, 12, 25, 330, 90, "台风"],
+											[54, 975, 33, 12, 25, 330, 90, "台风"],
+											[55, 980, 30, 11, 25, 330, 90, "强热带风暴"],
+											[56, 980, 30, 11, 25, 330, 0, "强热带风暴"],
+											[57, 982, 28, 10, 25, 330, 0, "强热带风暴"],
+											[58, 982, 28, 10, 25, 330, 0, "强热带风暴"],
+											[59, 982, 28, 10, 25, 330, 0, "强热带风暴"],
+											[60, 985, 25, 10, 25, 300, 0, "强热带风暴"],
+											[61, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[62, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[63, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[64, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[65, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[66, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[67, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[68, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[69, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[70, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[71, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[72, 985, 25, 10, 28, 300, 0, "强热带风暴"],
+											[73, 988, 23, 9, 28, 300, 0, "热带风暴"],
+											[74, 988, 23, 9, 30, 300, 0, "热带风暴"],
+											[75, 988, 23, 9, 30, 300, 0, "热带风暴"],
+											[76, 988, 23, 9, 35, 300, 0, "热带风暴"],
+											[77, 988, 23, 9, 35, 300, 0, "热带风暴"],
+											[78, 988, 23, 9, 35, 300, 0, "热带风暴"],
+											[79, 988, 23, 9, 36, 300, 0, "热带风暴"],
+											[80, 990, 20, 8, 36, 0, 0, "热带风暴"],
+											[81, 990, 20, 8, 31, 0, 0, "热带风暴"],
+											[82, 990, 20, 8, 24, 0, 0, "热带风暴"],
+											[83, 990, 20, 8, 20, 400, 0, "热带风暴"],
+											[84, 990, 20, 8, 21, 400, 0, "热带风暴"]
+										];
+
+										var schema = [
+											{ name: 'Time', index: 0, text: '时间' },
+											{ name: 'CentralPressure', index: 1, text: '气压' },
+											{ name: 'MaxWindSpeed', index: 2, text: '风速' },
+											{ name: 'WindForce', index: 3, text: '风力' },
+											{ name: 'TravelRate', index: 4, text: ' 移速' },
+											{ name: 'EffectRadius7', index: 5, text: '七级半径' },
+											{ name: 'EffectRadius10', index: 6, text: '十级半径' },
+											{ name: 'Level', index: 7, text: '等级' }
+										];
+
+										var lineStyle = {
+											normal: {
+												width: 1,
+												opacity: 0.5
+											}
+										};
+
+										option = {
+											tooltip: {
+												padding: 10,
+												backgroundColor: '#222',
+												borderColor: '#777',
+												borderWidth: 1,
+												formatter: function (obj) {
+													var value = obj[0].value;
+													return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
+														+ obj[0].seriesName + ' ' + value[0] + '日期：'
+														+ value[7]
+														+ '</div>'
+														+ schema[1].text + '：' + value[1] + '<br>'
+														+ schema[2].text + '：' + value[2] + '<br>'
+														+ schema[3].text + '：' + value[3] + '<br>'
+														+ schema[4].text + '：' + value[4] + '<br>'
+														+ schema[5].text + '：' + value[5] + '<br>'
+														+ schema[6].text + '：' + value[6] + '<br>';
+												}
+											},
+											parallelAxis: [
+												{ dim: 0, name: schema[0].text, inverse: true, max: 81, nameLocation: 'start' },
+												{ dim: 1, name: schema[1].text },
+												{ dim: 2, name: schema[2].text },
+												{ dim: 3, name: schema[3].text },
+												{ dim: 4, name: schema[4].text },
+												{ dim: 5, name: schema[5].text },
+												{ dim: 6, name: schema[6].text },
+												{
+													dim: 7, name: schema[7].text,
+													type: 'category', data: ['热带低压', '热带风暴', '强热带风暴', '台风', '强台风', '超强台风']
+												}
+											],
+											visualMap: {
+												show: false,
+												min: 0,
+												max: 84,
+												dimension: 2,
+												inRange: {
+													color: ['#d94e5d', '#eac736', '#50a3ba'].reverse(),
+												}
+											},
+											parallel: {
+												left: '5%',
+												right: '18%',
+												bottom: 20,
+												parallelAxisDefault: {
+													type: 'value',
+													name: 'TyphoonLevel',
+													nameLocation: 'end',
+													nameGap: 20,
+													nameTextStyle: {
+														color: '#336666',
+														fontSize: 12
+													},
+													axisLine: {
+														lineStyle: {
+															color: '#aaa'
+														}
+													},
+													axisTick: {
+														lineStyle: {
+															color: '#777'
+														}
+													},
+													splitLine: {
+														show: false
+													},
+													axisLabel: {
+														textStyle: {
+															color: '#336666'
+														}
+													}
+												}
+											},
+											series: [
+												{
+													name: 'Typhoon',
+													type: 'parallel',
+													lineStyle: lineStyle,
+													data: dataTP
+												}
+											]
+										};;
+										if (option && typeof option === "object") {
+											myChart.setOption(option, true);
+										}
+									</script>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row row-card-no-pd">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-head-row">
+										<h4 class="card-title">Global Geolocation</h4>
+										<div class="card-tools">
+											<button class="btn btn-icon btn-link btn-primary btn-xs"><span
+													class="fa fa-angle-down"></span></button>
+											<button
+												class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span
+													class="fa fa-sync-alt"></span></button>
+											<button class="btn btn-icon btn-link btn-primary btn-xs"><span
+													class="fa fa-times"></span></button>
+										</div>
+									</div>
+									<p class="card-category">
+										Map of the distribution of disaster around the world</p>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="table-responsive table-hover table-sales">
+												<table class="table">
+													<tbody>
+														<tr>
+															<td>
+																<div class="flag">
+																	<img src="assets/img/flags/kp.png"
+																		alt="north korea">
+																</div>
+															</td>
+															<td>North Korea</td>
+															<td class="text-right">
+																2.320
+															</td>
+															<td class="text-right">
+																42.18%
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="flag">
+																	<img src="assets/img/flags/cn.png" alt="china">
+																</div>
+															</td>
+															<td>China</td>
+															<td class="text-right">
+																240
+															</td>
+															<td class="text-right">
+																4.36%
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="flag">
+																	<img src="assets/img/flags/jp.png" alt="Japan">
+																</div>
+															</td>
+															<td>Japan</td>
+															<td class="text-right">
+																119
+															</td>
+															<td class="text-right">
+																2.16%
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="flag">
+																	<img src="assets/img/flags/kr.png"
+																		alt="south korea">
+																</div>
+															</td>
+															<td>South Korea</td>
+															<td class="text-right">
+																1.081
+															</td>
+															<td class="text-right">
+																19.65%
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="flag">
+																	<img src="assets/img/flags/ph.png"
+																		alt="Philippines">
+																</div>
+															</td>
+															<td>Philippines</td>
+															<td class="text-right">
+																1.100
+															</td>
+															<td class="text-right">
+																20%
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mapcontainer">
+												<div id="map-example" class="vmap"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<footer class="footer">
+				<div class="container-fluid">
+					<nav class="pull-left">
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									程天佑
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									金勤耕
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									刘翀
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									王文蕊
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<div class="copyright ml-auto">
+						Copyright &copy; 2019.GIS软件开发 孟庆祥 Allrights reserved.
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<!-- Custom template | don't include it in your project! -->
+		<div class="custom-template">
+			<div class="title">Settings</div>
+			<div class="custom-content">
+				<div class="switcher">
+					<div class="switch-block">
+						<h4>Logo Header</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeLogoHeaderColor" data-color="dark"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+							<br />
+							<button type="button" class="selected changeLogoHeaderColor" data-color="dark2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+							<button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Navbar Header</h4>
+						<div class="btnSwitch">
+							<button type="button" class="selected changeTopBarColor" data-color="dark"></button>
+							<button type="button" class="changeTopBarColor" data-color="blue"></button>
+							<button type="button" class="changeTopBarColor" data-color="purple"></button>
+							<button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+							<button type="button" class="changeTopBarColor" data-color="green"></button>
+							<button type="button" class="changeTopBarColor" data-color="orange"></button>
+							<button type="button" class="changeTopBarColor" data-color="red"></button>
+							<button type="button" class="changeTopBarColor" data-color="white"></button>
+							<br />
+							<button type="button" class="changeTopBarColor" data-color="dark2"></button>
+							<button type="button" class="changeTopBarColor" data-color="blue2"></button>
+							<button type="button" class="changeTopBarColor" data-color="purple2"></button>
+							<button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+							<button type="button" class="changeTopBarColor" data-color="green2"></button>
+							<button type="button" class="changeTopBarColor" data-color="orange2"></button>
+							<button type="button" class="changeTopBarColor" data-color="red2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Sidebar</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeSideBarColor" data-color="white"></button>
+							<button type="button" class="changeSideBarColor" data-color="dark"></button>
+							<button type="button" class="selected changeSideBarColor" data-color="dark2"></button>
+						</div>
+					</div>
+					<div class="switch-block">
+						<h4>Background</h4>
+						<div class="btnSwitch">
+							<button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+							<button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+							<button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+							<button type="button" class="selected changeBackgroundColor" data-color="dark"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="custom-toggle">
+				<i class="flaticon-settings"></i>
+			</div>
+		</div>
+		<!-- End Custom template -->
+	</div>
+	<!--   Core JS Files   -->
+	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="assets/js/core/popper.min.js"></script>
+	<script src="assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+	<!-- Chart JS -->
+	<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- jQuery Sparkline -->
+	<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Chart Circle -->
+	<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+
+	<!-- Datatables -->
+	<script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+	<!-- Bootstrap Notify -->
+	<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+	<!-- Sweet Alert -->
+	<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Atlantis JS -->
+	<script src="assets/js/atlantis.min.js"></script>
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="assets/js/setting-demo.js"></script>
+	<script src="assets/js/demo.js"></script>
+	<script>
+		$('#lineChart').sparkline([998,
+			998,
+			995,
+			990,
+			990,
+			990,
+			982,
+			982,
+			982,
+			982,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			975,
+			970,
+			970,
+			970,
+			970,
+			970,
+			970,
+			965,
+			965,
+			965,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			960,
+			965,
+			965,
+			965,
+			965,
+			965,
+			965,
+			970,
+			975,
+			975,
+			975,
+			975,
+			975,
+			980,
+			980,
+			982,
+			982,
+			982,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			985,
+			988,
+			988,
+			988,
+			988,
+			988,
+			988,
+			988,
+			990,
+			990,
+			990,
+			990,
+			990], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart2').sparkline([18,
+			18,
+			20,
+			23,
+			23,
+			23,
+			28,
+			28,
+			28,
+			28,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			33,
+			35,
+			35,
+			35,
+			35,
+			35,
+			35,
+			38,
+			38,
+			38,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			40,
+			38,
+			38,
+			38,
+			38,
+			38,
+			38,
+			35,
+			33,
+			33,
+			33,
+			33,
+			33,
+			30,
+			30,
+			28,
+			28,
+			28,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			23,
+			23,
+			23,
+			23,
+			23,
+			23,
+			23,
+			20,
+			20,
+			20,
+			20,
+			20], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart3').sparkline([30,
+			24,
+			28,
+			27,
+			27,
+			27,
+			26,
+			25,
+			25,
+			20,
+			20,
+			20,
+			23,
+			23,
+			23,
+			23,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			28,
+			28,
+			28,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			22,
+			20,
+			20,
+			22,
+			22,
+			22,
+			20,
+			20,
+			20,
+			20,
+			20,
+			20,
+			20,
+			20,
+			20,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			25,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			28,
+			30,
+			30,
+			35,
+			35,
+			35,
+			36,
+			36,
+			31,
+			24,
+			20,
+			21], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+	</script>
+	<script>
+		$('#map-example').vectorMap(
+			{
+				map: 'world_en',
+				backgroundColor: 'transparent',
+				borderColor: '#fff',
+				borderWidth: 2,
+				color: '#e4e4e4',
+				enableZoom: true,
+				hoverColor: '#35cd3a',
+				hoverOpacity: null,
+				normalizeFunction: 'linear',
+				scaleColors: ['#b6d6ff', '#005ace'],
+				selectedColor: '#35cd3a',
+				selectedRegions: ['PH', 'KR', 'JP', 'KP', 'CN', 'TW'],
+				showTooltip: true,
+				onRegionClick: function (element, code, region) {
+					return false;
+				},
+				onResize: function (element, width, height) {
+					console.log('Map Size: ' + width + 'x' + height);
+				},
+			});
+	</script>
+</body>
+
+</html>

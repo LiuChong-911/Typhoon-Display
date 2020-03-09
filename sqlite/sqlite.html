@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sqlite</title>
+</head>
+<body onload="init()">
+    <!-- 创建数据库对象、使用事务进行数据库操作 -->
+    国家：<input type="text" id="Contr"/>
+    受损程度：<input type="text" id="damRange" />
+    <input type="button" value="保存" onclick="saveData()" />
+    <hr/>
+    <input type="button" onclick="showAllData()" value="显示全部">
+            <input type="button" onclick="delAllData()" value="清空全部">
+            国家名：<input type="text" id="Selec" />
+            <input type="button" onclick="SelectData()" value="查询">
+    <hr/>
+    <table id="datatable" border="1">
+
+    </table>
+    <p id="'msg"></p>
+
+</body>
+<script type="text/javascript">
+    var datatable = null;
+    var db = openDatabase('mTyphoon','1.0','test db',1024*100);//数据库名 版本 数据库描述 大小
+
+    function init(){//初始化工作
+        datatable = document.getElementById('datatable');
+        showAllData();
+    }
+    function removeAllData(){//移除页面上展示的数据
+        for(var i = datatable.childNodes.length-1;i>=0;i--){
+            datatable.removeChild(datatable.childNodes[i]);
+        }
+        var tr = document.createElement('tr');
+        var th1 = document.createElement('th');
+        var th2 = document.createElement('th');
+        th1.innerHTML = '国家';
+        th2.innerHTML = '受损程度';
+        tr.appendChild(th1);
+        tr.appendChild(th2);
+        datatable.appendChild(tr);
+
+    }
+    function showData(row){//显示数据
+        var tr = document.createElement('tr');
+        var td1 = document.createElement('td');
+        td1.innerHTML = row.Contr;
+        var td2 = document.createElement('td');
+        td2.innerHTML = row.damRange;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        datatable.appendChild(tr);
+    }
+    function showAllData(){//显示所有数据
+
+        db.transaction(function (tx){
+            tx.executeSql('create table if not exists TypData(Contr TEXT,damRange TEXT)',[],function(tx,res){
+
+                },function(tx,err){
+                    alert(err.message)
+                });
+
+            tx.executeSql('select * from TypData',[],function(tx,result){
+                removeAllData();
+                for(var i = 0 ;i<result.rows.length;i++){
+                    showData(result.rows.item(i));
+                }
+            })
+        })
+    }
+    function saveData(){//保存数据
+        var Contr = document.getElementById('Contr').value;
+        var damRange = document.getElementById('damRange').value;
+        addData(Contr,damRange);
+        showAllData();
+    }
+    function addData(Contr,damRange){//添加数据
+        db.transaction(function(tx){
+            tx.executeSql('insert into TypData values(?,?)',[Contr,damRange],function(tx,rs){
+                alert('yes');
+            },
+            function (tx,err){
+                alert(err.source +'===='+err.message);
+            })
+        })
+    }
+    function  delAllData(){//删除所有数据
+        db.transaction(function(tx){
+            tx.executeSql('delete from TypData',[],function(tx,res){
+                alert('删除成功~');
+            },function (tx,err){
+                alert('删除失败'+err.message);
+            })
+        })
+        showAllData();
+    }
+    function SelectData() {//查询数据
+        var ContrName = document.getElementById('Selec').value;
+            db.transaction(function (context) {
+                context.executeSql('SELECT damRange FROM TypData WHERE Contr =? ', [ContrName   ], function (context, results) {
+                    var items = results.rows;
+                    if(items.length==0)throw(error);
+                    for (i = 0; i < items.length; i++) {
+                        var item = items.item(i);
+                        alert(ContrName+'的受损程度为:' + item.damRange );
+                    }
+                });
+            }, function (error) {
+                alert('查询数据失败:[' + error.message + ']');
+            }, function () {
+                alert('查询数据成功');
+            });
+        }
+</script>
+</html>
